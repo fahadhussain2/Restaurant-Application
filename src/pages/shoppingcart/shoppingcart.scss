@@ -1,0 +1,15 @@
+page-shoppingcart {
+    img{
+        height: 250px;
+    }
+    ion-grid{
+        text-align: center
+    }
+    #quantity{
+        width: auto
+    }
+    .decrement, .increment{
+        width: 50%;
+        height: 70%;
+    }
+}

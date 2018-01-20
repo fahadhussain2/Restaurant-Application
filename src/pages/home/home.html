@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name="menu" color="danger"></ion-icon>
+    </button>
+    <ion-title>Tablesure</ion-title>
+    <ion-buttons end>
+      <!-- <button ion-button clear outline color="primary" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button> -->
+      <button ion-button icon-only color="danger" (click)="myCart()">
+          <ion-badge>{{deals.myCartItems}}</ion-badge>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-tabs text-wrap color="hcolor" selectedIndex="0">
+    <ion-tab text-wrap [root]="tab1" tabTitle="Deals" tabIcon="pizza" tabsHideOnSubPages="true"></ion-tab>
+    <ion-tab text-wrap [root]="tab2" tabTitle="Groups" tabIcon="contacts" tabsHideOnSubPages="true"></ion-tab>
+    <ion-tab text-wrap [root]="tab3" tabTitle="Table Reservation" tabIcon="logo-usd" tabsHideOnSubPages="true"></ion-tab>
+    <ion-tab text-wrap [root]="tab4" tabTitle="Party Booking" tabIcon="logo-dropbox" tabsHideOnSubPages="true"></ion-tab>
+  </ion-tabs>
+
+  <!-- <button ion-button secondary (click)="ttt()">Toggle Menu</button> -->
+
+</ion-content>

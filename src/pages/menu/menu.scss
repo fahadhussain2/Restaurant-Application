@@ -1,0 +1,45 @@
+page-menu {
+
+    ion-toolbar{
+        height: 180px;
+    }
+
+    // .toolbar-background {
+    //     background-color: ;
+    //   }
+
+    .menuicon{
+        margin-left: 8px;
+        margin-right: 40px;
+    }
+
+    .Center{
+        text-align: center
+    }
+   
+    .driveImg{
+     
+        margin: 0 auto;
+        display: inline;
+        float: left;
+     }
+
+     .RoundImg{
+        border-radius: 100%;
+        height: 80px;
+        width: 80px;
+        border: 3px solid white
+    }
+
+    .Center h1 {
+        color: white;
+        white-space: initial;
+        float: right;
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+    }
+    
+}

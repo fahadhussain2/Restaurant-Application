@@ -1,0 +1,106 @@
+<!--
+  Generated template for the RestaurantdetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{restaurantDetails.Restaurant.Name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-slides id="landingImages" *ngIf = "ImageUrls.length > 0" [pager]="true" [autoplay]="2000" [loop]="false">
+    <ion-slide *ngFor="let ImageUrl of ImageUrls; let i=index">
+      <img src="https://www.tablesure.com/{{ImageUrl}}">
+    </ion-slide>
+  </ion-slides>
+
+  <div>
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <ion-segment-button text-wrap value="Details">
+        Details
+      </ion-segment-button>
+      <ion-segment-button text-wrap value="Menu Items">
+        Menu
+      </ion-segment-button>
+      <ion-segment-button text-wrap value="Recipe of the day">
+        Recipe
+      </ion-segment-button>
+      <!-- <ion-segment-button text-wrap value="Conditions">
+        Maps
+      </ion-segment-button> -->
+      <ion-segment-button (click)="goToGoogleMap()" text-wrap value="Map">
+        <!-- <ion-icon name="pin"></ion-icon> -->Map
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="selectedSegment" padding>
+    <ion-grid *ngSwitchCase="'Details'">
+      <ion-row>
+        <ion-col col-4>Cost For Two</ion-col>
+        <ion-col col-8>{{restaurantDetails.Restaurant.CostForTwoPrice}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>About</ion-col>
+        <ion-col col-8>{{restaurantDetails.Restaurant.Description}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Address</ion-col>
+        <ion-col col-8>{{restaurantDetails.Restaurant.FormattedAddress}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Opening Hours</ion-col>
+        <ion-col col-8>{{ISOToAMPM(restaurantDetails.Restaurant.OpenFromTime)}} - {{ISOToAMPM(restaurantDetails.Restaurant.OpenToTime)}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Cuisines</ion-col>
+        <ion-col col-8>
+            <p *ngFor="let cuisine of cuisines; let i=index">
+              {{i+1}}) {{cuisine}}
+              </p><br>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>Features</ion-col>
+        <ion-col col-8>
+            <p *ngFor="let feature of features; let i=index">
+                {{i+1}}) {{feature}}
+                </p><br>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div [ngSwitch]="selectedSegment" padding>
+    <div *ngSwitchCase="'Menu Items'">
+      <h3 *ngIf="menuItem.RestaurantMenu; else no_content">{{menuItem.RestaurantMenu.Name}}</h3>
+        <ion-slides id="imgslide" *ngIf = "ImageUrls.length > 0; else no_content" loop="true" slidesPerView="2">
+            <ion-slide *ngFor="let menu of menuItem.RestaurantMenuResource; let i=index">
+              <img src="https://www.tablesure.com/{{menu.Url}}" class="thumb-img" imageViewer>
+            </ion-slide>
+          </ion-slides>
+          <ng-template #no_content>
+            <h3>No menu available</h3>
+          </ng-template>
+    </div>
+  </div>
+
+  <div [ngSwitch]="selectedSegment" padding>
+      <div *ngSwitchCase="'Recipe of the day'">
+        <h2 class="center">Recipe of the Day</h2>
+        <h3>{{restaurantDetails.Restaurant.RecipeOfTheDay}}</h3>
+      </div>
+    </div>
+
+
+
+  <button ion-button full color="danger">Book Me</button>
+
+</ion-content>

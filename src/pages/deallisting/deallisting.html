@@ -1,0 +1,119 @@
+<!--
+  Generated template for the DeallistingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>deallisting</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"></ion-refresher-content>
+      </ion-refresher>
+
+  <div class="segment">
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <!-- <ion-segment-button value="Near By">
+        Near By
+      </ion-segment-button> -->
+      <ion-segment-button text-wrap value="ALL">
+          All
+        </ion-segment-button>
+      <ion-segment-button value="Featured">
+        Featured
+      </ion-segment-button>
+    </ion-segment>
+
+  </div>
+
+  <div [ngSwitch]="selectedSegment">
+    <ion-list *ngSwitchCase="'ALL'">
+      <div class="category">
+            <ion-item>
+                <button *ngFor="let category of categories; let i=index" class="dealCategory" ion-button small [outline] = "category.isOutline" color="danger" (click)="filterByCategory(category.Name, i)">{{category.Name}} ({{category.Count}})</button>
+            </ion-item>
+      </div>
+      
+      <div class="spin">
+        <ion-spinner *ngIf="dealList < 1" name="crescent" text-center></ion-spinner>
+      </div>
+      <ion-item *ngFor="let deal of dealList; let i=index" (click)="viewDeal(deal,i)" text-wrap>
+        <ion-thumbnail item-start>
+          <img src="http://www.tablesure.com/{{deal.deal.Photo}}">
+        </ion-thumbnail>
+        <h3>{{deal.deal.Name}}</h3>
+        <h5 class="price">{{deal.deal.CurrencySymbol}} {{deal.dealOffer.Price}}</h5>
+        <h5>{{100 - (deal.dealOffer.DiscountedPrice/deal.dealOffer.Price)*100 | number: '1.0-0'}} % OFF</h5>
+        <h3 class="discounted_price" item-end>{{deal.deal.CurrencySymbol}} {{deal.dealOffer.DiscountedPrice}}</h3>
+        <p>{{deal.deal.RestaurantName}}</p>
+        <!-- <button ion-button clear item-end color="danger">View</button> -->
+      </ion-item>
+      <!-- <ion-item-options side="left">
+          <button ion-button (click)="favorite(item)">Favorite</button>
+          <button ion-button color="danger" (click)="share(item)">Share</button>
+        </ion-item-options> -->
+    
+        <!-- <ion-item-options side="right">
+          <button ion-button color="danger" (click)="viewDeal(deal,i)">View</button>
+        </ion-item-options> -->
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Featured'">
+        <ion-item *ngFor="let featuredDeal of featuredDeals; let i=index" (click)="viewDeal(featuredDeal,i)"  text-wrap>
+            <ion-thumbnail item-start>
+              <img src="http://www.tablesure.com/{{featuredDeal.deal.Photo}}">
+            </ion-thumbnail>
+            <h3>{{featuredDeal.deal.Name}}</h3>
+            
+            <h5 class="price">{{featuredDeal.deal.CurrencySymbol}} {{featuredDeal.dealOffer.Price}}</h5>
+            <h5>{{100 - (featuredDeal.dealOffer.DiscountedPrice/featuredDeal.dealOffer.Price)*100 | number: '1.0-0'}} % OFF</h5>
+            <h3 class="discounted_price" item-end>{{featuredDeal.deal.CurrencySymbol}} {{featuredDeal.dealOffer.DiscountedPrice}}</h3>
+            <p>{{featuredDeal.deal.RestaurantName}}</p>
+            <!-- <button ion-button clear item-end color="danger">View</button> -->
+          </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Near By'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-1.jpg">
+        </ion-thumbnail>
+        <h2>Daffy</h2>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-2.jpg">
+        </ion-thumbnail>
+        <h2>Huey</h2>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-3.jpg">
+        </ion-thumbnail>
+        <h2>Dewey</h2>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/thumbnail-duckling-4.jpg">
+        </ion-thumbnail>
+        <h2>Louie</h2>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>

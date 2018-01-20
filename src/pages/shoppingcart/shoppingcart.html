@@ -1,0 +1,205 @@
+<!--
+  Generated template for the ShoppingcartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>shoppingcart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <ion-card *ngFor="let cart of shoppingCart; let i='index'">
+
+    <img src="http://www.tablesure.com/{{cart.deal.Photo}}" />
+
+    <ion-card-content>
+      <ion-card-title>
+        {{cart.deal.Name}} - {{cart.dealOffer.Name}}
+      </ion-card-title>
+      <p>
+        {{cart.deal.Description}}
+      </p>
+    </ion-card-content>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          Price
+        </ion-col>
+        <ion-col col-5>
+          Quantity
+        </ion-col>
+        <ion-col col-3>
+          Total
+        </ion-col>
+        <ion-col col-2>
+          Saving
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-2>
+          {{cart.deal.CurrencySymbol}} {{cart.dealOffer.DiscountedPrice}}
+        </ion-col>
+        <ion-col col-5>
+          <ion-item>
+              <ion-input type="number" placeholder="Enter Quantity" [(ngModel)]="cart.dealCart.DealOfferQuantity" (keyup)="selectQuantity(i)"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3>
+          {{cart.deal.CurrencySymbol}} {{cartWithTotalAndSaving[i].totalPrice}}
+        </ion-col>
+        <ion-col col-2>
+            {{cart.deal.CurrencySymbol}} {{cartWithTotalAndSaving[i].totalSaving}}
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="primary" icon-start (click)="updateCart(i)">
+          <ion-icon name='refresh'></ion-icon>
+          Update
+        </button>
+      </ion-col>
+
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start (click)="deleteCart(cart.dealCart.Id,i)">
+          <ion-icon name='trash'></ion-icon>
+          Delete
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card> -->
+
+
+
+  <ion-list>
+    <ion-item *ngFor="let cartItem of cartWithTotalAndSaving; let i='index'">
+      <ion-thumbnail item-start>
+        <img src="http://www.tablesure.com/{{cartItem.deal.Photo}}">
+      </ion-thumbnail>
+      <h6>{{cartItem.dealOffer.Name}}</h6>
+      <button ion-button color="danger" clear item-end>{{cartItem.deal.CurrencySymbol}} {{cartWithTotalAndSaving[i].totalPrice}}</button>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button class="decrement" ion-button color="danger" small (click)="decrement(offer,i)">
+              <ion-icon name="remove"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <span>{{cartItem.dealCart.DealOfferQuantity}}</span>
+          </ion-col>
+          <ion-col>
+            <button class="increment" ion-button color="danger" small (click)="increment(offer,i)">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <button ion-button clear item-end>{{cartItem.deal.CurrencySymbol}} {{cartWithTotalAndSaving[i].totalSaving}}</button> -->
+    </ion-item>
+  </ion-list>
+  <hr>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col>
+        <p>Subtotal</p>
+        <p>Tax(0%)</p>
+        <p>Shipping</p>
+        <p>Grand Total</p>
+      </ion-col>
+      <ion-col>
+        <p>{{subTotal}}</p>
+        <p>0.00</p>
+        <p>0.00</p>
+        <p>{{subTotal}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card>
+    <ion-card-header>
+      Billing Information
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list no-lines>
+
+        <ion-item>
+          <ion-input type="text" placeholder="Full Name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="email" placeholder="Email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" placeholder="Address 1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" placeholder="Address 2"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" placeholder="Location/Landmark"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="number" placeholder="Mobile No"></ion-input>
+        </ion-item>
+
+        <ion-auto-complete [dataProvider]="setupCountryService" [options]="{ placeholder : 'Select Country' }"></ion-auto-complete>
+        
+
+        <!-- <ion-item>
+            <ion-input type="text" placeholder="Search Country" [(ngModel)]="newUser.CountryName" (keyup)="setupCountry()"></ion-input>
+          </ion-item> -->
+
+        <!-- <ion-auto-complete [dataProvider]="setupCountryService" [options]="{ placeholder : 'Select Country' }"></ion-auto-complete> -->
+
+
+      </ion-list>
+    </ion-card-content>
+    <!-- <div class='pm-button'><a href='https://www.payumoney.com/sandbox/paybypayumoney/#/9FFD72CF3887CC33B20763875FC3EA31'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>  -->
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+          Total:{{subTotal}}
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+    <button ion-button block full clear>Checkout</button>
+
+  </ion-toolbar>
+</ion-footer>

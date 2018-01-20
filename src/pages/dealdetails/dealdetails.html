@@ -1,0 +1,196 @@
+<!--
+  Generated template for the DealdetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>dealdetails</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <div *ngIf="dealInfo">
+    <div class="img">
+        <img src="http://www.tablesure.com/{{dealInfo.Deal.Photo}}">
+    </div>
+    
+
+    <div>
+      <ion-segment [(ngModel)]="selectedSegment" color="danger">
+        <ion-segment-button text-wrap value="Details">
+          Details
+        </ion-segment-button>
+        <ion-segment-button text-wrap value="Validity">
+          Validity
+        </ion-segment-button>
+        <ion-segment-button text-wrap value="Remember">
+          Remember
+        </ion-segment-button>
+        <ion-segment-button text-wrap value="Conditions">
+          Conditions
+        </ion-segment-button>
+        <ion-segment-button (click)="goToGoogleMap()" text-wrap value="Map">
+          <!-- <ion-icon name="pin"></ion-icon> --> Map
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div [ngSwitch]="selectedSegment">
+      <ion-list no-lines *ngSwitchCase="'Details'">
+        <ion-item text-wrap>
+          <p>{{dealInfo.Deal.Description}}</p>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'Validity'" padding>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              Valid From
+            </ion-col>
+            <ion-col col-7>
+              {{dealInfo.Deal.FromDate | date}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5>
+              Valid Until
+            </ion-col>
+            <ion-col col-7>
+              {{dealInfo.Deal.ToDate | date}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5>
+              Timings
+            </ion-col>
+            <ion-col col-7>
+              <!-- {{dealInfo.DealTiming[0].FromTime | date:'HH:mm a'}} to {{dealInfo.DealTiming[0].ToTime | date:'HH:mm a'}} -->
+              {{ISOToAMPM(dealInfo.DealTiming[0].FromTime)}} to {{ISOToAMPM(dealInfo.DealTiming[0].ToTime)}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5>
+              Valid Days
+            </ion-col>
+            <ion-col col-7>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsSunday ? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsSunday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsSunday" name="close-circle"></ion-icon>S                  
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsMonday ? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsMonday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsMonday" name="close-circle"></ion-icon>M
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsTuesday ? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsTuesday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsTuesday" name="close-circle"></ion-icon>T                  
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsWednesday? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsWednesday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsWednesday" name="close-circle"></ion-icon>W                  
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsThursday? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsThursday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsThursday" name="close-circle"></ion-icon>T                  
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsFriday? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsFriday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsFriday" name="close-circle"></ion-icon>F
+              </button>
+              <button class="availableDays" ion-button icon-left [color]="dealInfo.Deal.IsSaturday? 'secondary' : 'danger'" small>
+                  <ion-icon *ngIf="dealInfo.Deal.IsSaturday" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!dealInfo.Deal.IsSaturday" name="close-circle"></ion-icon>S                  
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+
+      <ion-list no-lines *ngSwitchCase="'Remember'">
+        <ion-item text-wrap *ngFor="let point of thingsToRemember; let i='index'">
+         <p>{{i+1}}) {{point}}</p>
+        </ion-item>
+      </ion-list>
+
+      <ion-list no-lines *ngSwitchCase="'Conditions'">
+        <ion-item text-wrap *ngFor="let condition of conditions; let i='index'">
+          <p>{{i+1}}) {{condition}}</p>
+        </ion-item>
+      </ion-list>
+
+      <!-- <ion-list *ngSwitchCase="'Map'">
+          <div style="height: 50%;" id="map_canvas" #map></div>
+      </ion-list> -->
+    </div>
+
+
+
+    <ion-list>
+      <ion-item *ngFor="let offer of dealInfo.DealOffer; let i=index">
+        <ion-icon name="star"></ion-icon>
+        {{offer.Name}}
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+            
+            <ion-col>
+              <button class="counter" ion-button color="danger" small (click)="decrement(offer,i)">
+                <ion-icon name="remove"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <span>{{dealOffer[i].noOfItems || 0}}</span>
+            </ion-col>
+            <ion-col>
+              <button class="counter" ion-button color="danger" small (click)="increment(offer,i)">
+                <ion-icon name="add"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+
+            </ion-col>
+            <ion-col>
+              {{offer.DiscountedPrice}}
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col col-8>
+              <p>Saving - {{100 - (offer.DiscountedPrice/offer.Price)*100 | number: '1.0-0'}}%</p>
+            </ion-col>
+            <!-- <ion-col></ion-col>
+            <ion-col></ion-col> -->
+            <ion-col col-4>
+              <p>{{offer.RemainingOffers}} more left</p>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-list *ngIf="dealInfo">
+    <ion-item>
+        <ion-checkbox [(ngModel)]="termsandconditions"></ion-checkbox>
+        <ion-label>I agree</ion-label> <button item-end ion-button clear small (click)="ShowTermsandConditions()"> terms and conditions</button>  
+    </ion-item>
+    </ion-list>
+
+    <button *ngIf="dealInfo" ion-button full icon-left color="danger" (click)="addToCart()">
+        <ion-icon name="cart"></ion-icon> Add to Cart</button>
+</ion-content>
+
+<!-- <ion-footer> -->
+  
+<!-- </ion-footer> -->

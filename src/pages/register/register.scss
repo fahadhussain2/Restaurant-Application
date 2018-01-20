@@ -1,0 +1,75 @@
+page-register {
+    .background{
+        background-image: url('../assets/cover-photo.jpg');
+    }
+
+    .scroll-content{
+        padding-top: 85px;
+        align-content: center;
+        display: list-item;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center
+    }
+
+    ion-card.card{
+        box-shadow: none;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 5px;
+        margin-top: -10px;
+    }
+
+    a,p,
+    ion-card-header.card-header{
+        color: #fff;
+    }
+
+    .list > .item-block:first-child{
+        border: medium none;
+    }
+
+    .item{
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border: medium none;
+
+        .text-input, {
+            color: #fff;
+        }
+        
+        input::-moz-placeholder{
+            color: #fff!important;
+        }
+        input:-moz-placeholder{
+            color: #fff!important;
+        }
+        *::-webkit-input-placeholder{
+            color: #fff!important;
+        }
+        *:-ms-input-placeholder{
+            color: #fff!important;
+        }
+        *:-moz-placeholder{
+            color: #fff!important;
+        }
+        
+    }
+
+    .icon{
+        padding-right: 10px;
+    }
+    
+    .bottom{
+        position: absolute;
+        bottom: 0;
+    }
+    
+}
+
+.toaster{
+    text-align: center
+}
+
+ion-auto-complete {
+    width: 87vw;
+  }

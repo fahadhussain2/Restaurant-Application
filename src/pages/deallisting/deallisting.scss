@@ -1,0 +1,36 @@
+page-deallisting {
+    .price{
+        text-decoration: line-through
+    }
+    
+    .discounted_price{
+        color: red
+    }
+
+    ion-grid {
+        height: 100%;
+        justify-content: center;
+    }
+
+    .category{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .dealCategory{
+        font-size: 10.5px;
+        // margin-right: -14px;
+    }
+
+    .spin{
+        text-align: center;        
+    }
+
+    ion-spinner * {
+        width: 58px;
+        height: 58px;
+        stroke: #444;
+        fill: #222;
+      }
+      
+
+}

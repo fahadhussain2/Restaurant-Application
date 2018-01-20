@@ -1,0 +1,215 @@
+<!--
+  Generated template for the TablereservationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>tablereservation</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding>
+
+  
+
+  <div class="spin">
+    <ion-spinner *ngIf="allTypes.length < 1" name="crescent" text-center></ion-spinner>
+  </div>
+
+  <div *ngIf="allTypes.length != 0">
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Select City</ion-label>
+        <ion-select [(ngModel)]="filterValues.selectedCity" cancelText="Cancel" okText="Ok">
+          <ion-option *ngFor="let city of cities" [value]="city.Name">{{city.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Restaurant Types</ion-label>
+        <ion-select [(ngModel)]="filterValues.types" multiple="true" cancelText="Cancel" okText="Ok">
+          <ion-option *ngFor="let restaurantType of restaurantTypes" [value]="restaurantType.Name">{{restaurantType.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Restaurant Cuisines</ion-label>
+        <ion-select [(ngModel)]="filterValues.cuisines" multiple="true" cancelText="Cancel" okText="Ok">
+          <ion-option *ngFor="let restaurantCuisine of restaurantCuisines" [value]="restaurantCuisine.Name">{{restaurantCuisine.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Restaurant Features</ion-label>
+        <ion-select [(ngModel)]="filterValues.features" multiple="true" cancelText="Cancel" okText="Ok">
+          <ion-option *ngFor="let restaurantFeature of restaurantFeatures" [value]="restaurantFeature.Name">{{restaurantFeature.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <button ion-button block outline color="danger" (click)="applyFilter()">Apply Filter</button>
+  </div>
+
+  <div class="segment">
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <ion-segment-button value="Near By">
+        Near By
+      </ion-segment-button>
+      <ion-segment-button value="Featured">
+        Featured
+      </ion-segment-button>
+      <ion-segment-button text-wrap value="All Restaurant">
+        All
+      </ion-segment-button>
+    </ion-segment>
+
+  </div>
+
+  <div [ngSwitch]="selectedSegment">
+    <ion-list *ngSwitchCase="'Near By'">
+
+        <ion-card *ngFor="let restaurant of nearByRestaurants; let i='index'">
+            <img src="http://www.tablesure.com/{{restaurant.Photo}}" />
+            <div class="cardtitle">{{restaurant.CuisineName}}</div>
+            <div class="cardsubtitle">{{restaurant.RestaurantTypeName}}</div>
+            <ion-card-content>
+              <ion-card-title>
+                {{restaurant.Name}}
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+              </ion-card-title>
+              <p>
+                The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+              </p>
+            </ion-card-content>
+    
+            <ion-row no-padding>
+              <ion-col col-3>
+                <button ion-button clear small color="danger">
+                  Favorite
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button clear small color="danger">
+                  {{restaurant.LocationName}}
+                </button>
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button clear small color="danger">
+                  Rs.{{restaurant.CostForTwoPrice}}
+                </button>
+              </ion-col>
+            </ion-row>
+    
+          </ion-card>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Featured'">
+
+        <ion-card *ngFor="let restaurant of featuredRestaurants; let i='index'">
+            <img src="http://www.tablesure.com/{{restaurant.Photo}}" />
+            <div class="cardtitle">{{restaurant.CuisineName}}</div>
+            <div class="cardsubtitle">{{restaurant.RestaurantTypeName}}</div>
+            <ion-card-content>
+              <ion-card-title>
+                {{restaurant.Name}}
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+                <ion-icon color="danger" name="star" small></ion-icon>
+              </ion-card-title>
+              <p>
+                The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+              </p>
+            </ion-card-content>
+      
+            <ion-row no-padding>
+              <ion-col col-3>
+                <button ion-button clear small color="danger">
+                  Favorite
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button clear small color="danger">
+                  {{restaurant.LocationName}}
+                </button>
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button clear small color="danger">
+                  Rs.{{restaurant.CostForTwoPrice}}
+                </button>
+              </ion-col>
+            </ion-row>
+      
+          </ion-card>
+      
+          <!-- <button *ngIf="showMoreButtonFlag" ion-button block outline color="danger" (click)="showMore()">Show More</button> -->
+      
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'All Restaurant'">
+
+      <ion-card *ngFor="let restaurant of restaurants; let i='index'" (click)="viewRestaurant(restaurant, i)">
+        <img src="http://www.tablesure.com/{{restaurant.Photo}}" />
+        <div class="cardtitle">{{restaurant.CuisineName}}</div>
+        <div class="cardsubtitle">{{restaurant.RestaurantTypeName}}</div>
+        <ion-card-content>
+          <ion-card-title>
+            {{restaurant.Name}}
+            <ion-icon color="danger" name="star" small></ion-icon>
+            <ion-icon color="danger" name="star" small></ion-icon>
+            <ion-icon color="danger" name="star" small></ion-icon>
+            <ion-icon color="danger" name="star" small></ion-icon>
+            <ion-icon color="danger" name="star" small></ion-icon>
+          </ion-card-title>
+          <p>
+            The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col col-3>
+            <button ion-button clear small color="danger">
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button clear small color="danger">
+              {{restaurant.LocationName}}
+            </button>
+          </ion-col>
+          <ion-col col-3>
+            <button ion-button clear small color="danger">
+              Rs.{{restaurant.CostForTwoPrice}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+
+      <button *ngIf="showMoreButtonFlag" ion-button block outline color="danger" (click)="showMore()">Show More</button>
+
+
+    </ion-list>
+  </div>
+
+
+
+</ion-content>
