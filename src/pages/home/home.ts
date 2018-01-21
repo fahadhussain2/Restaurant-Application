@@ -25,9 +25,9 @@ export class HomePage {
   constructor(public navCtrl: NavController,
               public deals: DealsProvider) {
 
-                // deals.getCart().subscribe((myCart)=>{
-                //   this.myCartLength = myCart.length;
-                // })
+                deals.getCart().subscribe((myCart)=>{
+                  deals.myCartItems = myCart.length;
+                })
   }
 
   logout(){

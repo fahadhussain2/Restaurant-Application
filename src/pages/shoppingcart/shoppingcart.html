@@ -138,7 +138,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       Billing Information
     </ion-card-header>
@@ -172,23 +172,25 @@
         <ion-auto-complete [dataProvider]="setupCountryService" [options]="{ placeholder : 'Select Country' }"></ion-auto-complete>
         
 
-        <!-- <ion-item>
+        <ion-item>
             <ion-input type="text" placeholder="Search Country" [(ngModel)]="newUser.CountryName" (keyup)="setupCountry()"></ion-input>
-          </ion-item> -->
+          </ion-item>
 
-        <!-- <ion-auto-complete [dataProvider]="setupCountryService" [options]="{ placeholder : 'Select Country' }"></ion-auto-complete> -->
+        <ion-auto-complete [dataProvider]="setupCountryService" [options]="{ placeholder : 'Select Country' }"></ion-auto-complete>
 
 
       </ion-list>
     </ion-card-content>
-    <!-- <div class='pm-button'><a href='https://www.payumoney.com/sandbox/paybypayumoney/#/9FFD72CF3887CC33B20763875FC3EA31'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>  -->
-  </ion-card>
+    <div class='pm-button'><a href='https://www.payumoney.com/sandbox/paybypayumoney/#/9FFD72CF3887CC33B20763875FC3EA31'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div> 
+  </ion-card> -->
+
+  <button ion-button block full color="danger">Checkout</button>  
 
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
-    <!-- <ion-grid>
+    <ion-grid>
       <ion-row>
         <ion-col>
         </ion-col>
@@ -198,8 +200,8 @@
           Total:{{subTotal}}
         </ion-col>
       </ion-row>
-    </ion-grid> -->
+    </ion-grid>
     <button ion-button block full clear>Checkout</button>
 
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

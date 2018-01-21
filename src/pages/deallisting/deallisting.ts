@@ -33,7 +33,7 @@ export class DeallistingPage {
     public alertCtrl: AlertController,
     public deals: DealsProvider) {
     this.deals.dealsList().subscribe((deals) => {
-      console.log('All Dealssss', deals);
+      console.log('All Dealssss', deals, Date.parse('01/01/2011 10:20:45') > Date.parse('01/01/2011 5:10:10'));
       if (deals) {
         deals.dealOfferVM.forEach(deal => {
           if (deal.deal && deal.dealOffer) {

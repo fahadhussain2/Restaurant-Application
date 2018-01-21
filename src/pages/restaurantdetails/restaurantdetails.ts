@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { ReservationdetailsPage } from '../../pages/reservationdetails/reservationdetails'
 
 
 /**
@@ -90,6 +91,12 @@ export class RestaurantdetailsPage {
     // console.log(minutes,TimeStamp,formatedDate)
     return formatedDate;
 
+  }
+
+  goToReservation(){
+    this.navCtrl.push(ReservationdetailsPage,{
+      restaurantObj: this.restaurantDetails
+    })
   }
 
 }

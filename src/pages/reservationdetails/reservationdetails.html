@@ -1,0 +1,140 @@
+<!--
+  Generated template for the ReservationdetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>reservationdetails</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="calendar" padding></ion-icon> Date</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="restaurantOffer.selectedDate" [min]="minDate" (ionChange)="getOffers()"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="people" padding></ion-icon> No of Persons</ion-label>
+    <ion-select [(ngModel)]="restaurantOffer.noOfPersons" (ionChange)="getOffers()" interface="popover">
+      <ion-option value="1">1 person</ion-option>
+      <ion-option value="2">2 persons</ion-option>
+      <ion-option value="3">3 persons</ion-option>
+      <ion-option value="4">4 persons</ion-option>
+      <ion-option value="5">5 persons</ion-option>
+      <ion-option value="6">6 persons</ion-option>
+      <ion-option value="7">7 persons</ion-option>
+      <ion-option value="8">8 persons</ion-option>
+      <ion-option value="9">9 persons</ion-option>
+      <ion-option value="10">10 persons</ion-option>
+      <ion-option value="11">11 persons</ion-option>
+      <ion-option value="12">12 persons</ion-option>
+      <ion-option value="13">13 persons</ion-option>
+      <ion-option value="14">14 persons</ion-option>
+      <ion-option value="15">15 persons</ion-option>
+      <ion-option value="16">16 persons</ion-option>
+      <ion-option value="17">17 persons</ion-option>
+      <ion-option value="18">18 persons</ion-option>
+      <ion-option value="19">19 persons</ion-option>
+      <ion-option value="20">20 persons</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="cart" padding></ion-icon> {{discount}}% : {{time}}</ion-label>
+    <ion-input clearInput type="text" disabled></ion-input>
+  </ion-item>
+  <br>
+  <br>
+
+  <div>
+    <ion-segment [(ngModel)]="selectedSegment" color="danger">
+      <ion-segment-button text-wrap value="Time Wise Offers">
+        Time Wise Offers ({{timeWiseOffers.length}})
+      </ion-segment-button>
+      <ion-segment-button text-wrap value="Group Wise Offers">
+        Group Wise Offers ({{tableWiseOffers.length}})
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="selectedSegment" padding>
+    <div *ngSwitchCase="'Time Wise Offers'">
+      <div class="spin" *ngIf="tableBooking.loader">
+        <ion-spinner  name="crescent" text-center></ion-spinner>
+      </div>
+      <div class="center" *ngIf="!tableBooking.loader && timeWiseOffers.length < 1">
+        <h6>No offer available at this time</h6>
+      </div>
+      <div class="offers">
+        <button *ngFor="let timeWiseOffer of sortTime(timeWiseOffers); let i=index" class="round" ion-button [color]="color" [outline]="timeWiseOffers[i].isOutline"
+          (click)="offerSelected(timeWiseOffer, i)">
+          {{timeWiseOffer.formattedTime}}
+          <br>-{{timeWiseOffer.offerAmount}}%
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div [ngSwitch]="selectedSegment" padding>
+    <div *ngSwitchCase="'Group Wise Offers'">
+      <div class="spin" *ngIf="tableBooking.loader">
+        <ion-spinner name="crescent" text-center></ion-spinner>
+      </div>
+      <div class="center" *ngIf="!tableBooking.loader && tableWiseOffers.length < 1">
+        <h6>No offer available at this time</h6>
+      </div>
+      <div class="offers">
+        <button *ngFor="let tableWiseOffer of sortTime(tableWiseOffers); let i=index" class="round" ion-button [color]="color" [outline]="tableWiseOffers[i].isOutline"
+          (click)="offerSelected2(tableWiseOffer, i)">
+          {{tableWiseOffer.formattedTime}}
+          <br>-{{tableWiseOffer.offerAmount}}%
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="person" padding></ion-icon>
+    </ion-label>
+    <ion-input clearInput type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="mail" padding></ion-icon>
+    </ion-label>
+    <ion-input clearInput type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon color="danger" name="phone-portrait" padding></ion-icon> {{currentUser.PhoneNumber}}
+    </ion-label>
+    <ion-input clearInput type="text" [(ngModel)]="phoneNumber2"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-checkbox [(ngModel)]="termsandconditions"></ion-checkbox>
+      <ion-label>I agree</ion-label>
+      <button item-end ion-button clear small (click)="ShowTermsandConditions()"> terms and conditions</button>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full icon-left color="danger" (click)="reserveMe()">
+    <ion-icon name="cart"></ion-icon> Reserve Me</button>
+
+
+
+</ion-content>

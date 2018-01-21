@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { TablebookingProvider } from '../../providers/tablebooking/tablebooking';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GoogleMap, GoogleMaps, GoogleMapOptions, GoogleMapsEvent} from '@ionic-native/google-maps';
+import { GoogleMap, GoogleMaps, GoogleMapOptions, GoogleMapsEvent } from '@ionic-native/google-maps';
 import { RestaurantdetailsPage } from '../../pages/restaurantdetails/restaurantdetails';
 import { DealsProvider } from '../../providers/deals/deals'
 
@@ -60,15 +60,15 @@ export class TablereservationPage {
       console.log('Error', err);
     })
 
-    tableBooking.getFeaturedRestaurants(this.page, this.filterValues).subscribe((allRestaurants)=>{
-      if(allRestaurants){
+    tableBooking.getFeaturedRestaurants(this.page, this.filterValues).subscribe((allRestaurants) => {
+      if (allRestaurants) {
         allRestaurants.forEach(restaurant => {
-          if(restaurant.Restaurant.Featured){
+          if (restaurant.Restaurant.Featured) {
             this.featuredRestaurants.push(restaurant.Restaurant)
           }
         });
       }
-    }, err=>{
+    }, err => {
       console.log('Error', err)
     })
 
@@ -85,7 +85,7 @@ export class TablereservationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TablereservationPage');
-    this.platform.ready().then(()=>{
+    this.platform.ready().then(() => {
       this.getCurrentLocation();
     })
   }
@@ -135,36 +135,36 @@ export class TablereservationPage {
     toast.present();
   }
 
-  getCurrentLocation(){
+  getCurrentLocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('my location obj',resp);
+      console.log('my location obj', resp);
       let lat = resp.coords.latitude;
-      let lng = resp.coords.longitude;      
-      this.tableBooking.getNearByRestaurants(this.filterValues).subscribe((allRestaurants)=>{
+      let lng = resp.coords.longitude;
+      this.tableBooking.getNearByRestaurants(this.filterValues).subscribe((allRestaurants) => {
         console.log('yuppeee!!!', allRestaurants)
         allRestaurants.forEach(restaurant => {
-          let distance = parseFloat(this.tableBooking.getDistance(lat, lng, restaurant.Restaurant.Latitude, restaurant.Restaurant.Longitude,'K').toFixed(2));
-          if(distance < 1){
+          let distance = parseFloat(this.tableBooking.getDistance(lat, lng, restaurant.Restaurant.Latitude, restaurant.Restaurant.Longitude, 'K').toFixed(2));
+          if (distance < 1) {
             this.nearByRestaurants.push(restaurant.Restaurant);
           }
-          console.log('dist', distance);    
+          console.log('dist', distance);
         });
-      }, err=>{
+      }, err => {
         console.log('error agaya ==>', err)
       })
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
-  viewRestaurant(restaurant){
+  viewRestaurant(restaurant) {
     // console.log('Restaurant clicked', restaurant);
-    this.tableBooking.getRestaurantDetails(restaurant.Id).subscribe((restaurantDetails)=>{
-      if(restaurantDetails){
-        this.deal.navCtrl.push(RestaurantdetailsPage,{
+    this.tableBooking.getRestaurantDetails(restaurant.Id).subscribe((restaurantDetails) => {
+      if (restaurantDetails) {
+        this.deal.navCtrl.push(RestaurantdetailsPage, {
           restaurantDetails: restaurantDetails
         })
       }
-    }, err =>{
+    }, err => {
       throw err
     })
   }

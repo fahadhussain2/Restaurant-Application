@@ -1,0 +1,23 @@
+page-reservationdetails {
+
+    .round{
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        border: 2px solid;
+        font-size: 11.5px;
+    }
+
+    
+    .spin,.center,.offers{
+        text-align: center;        
+    }
+
+    ion-spinner * {
+        width: 40px;
+        height: 40px;
+        stroke: #444;
+        fill: #222;
+      }
+
+}

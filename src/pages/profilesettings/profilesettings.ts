@@ -52,8 +52,8 @@ export class ProfilesettingsPage {
       "LocationId": this.currentUser.LocationId,
       "LocationName": this.currentUser.LocationName,
       "Pin": this.currentUser.Pin,
-      "PhoneNumber2": "+91",
-      "PhoneNumber": this.currentUser.PhoneNumber2,
+      "PhoneNumber2": this.currentUser.PhoneNumber2,
+      "PhoneNumber": "+91",
       "Gender": this.currentUser.Gender,
       "Image": this.currentUser.Image
     }

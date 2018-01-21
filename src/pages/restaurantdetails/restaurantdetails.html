@@ -15,7 +15,7 @@
 
 <ion-content>
 
-  <ion-slides id="landingImages" *ngIf = "ImageUrls.length > 0" [pager]="true" [autoplay]="2000" [loop]="false">
+  <ion-slides id="landingImages" *ngIf="ImageUrls.length > 0" [pager]="true" [autoplay]="2000" [loop]="false">
     <ion-slide *ngFor="let ImageUrl of ImageUrls; let i=index">
       <img src="https://www.tablesure.com/{{ImageUrl}}">
     </ion-slide>
@@ -62,17 +62,19 @@
       <ion-row>
         <ion-col col-4>Cuisines</ion-col>
         <ion-col col-8>
-            <p *ngFor="let cuisine of cuisines; let i=index">
-              {{i+1}}) {{cuisine}}
-              </p><br>
+          <p *ngFor="let cuisine of cuisines; let i=index">
+            {{i+1}}) {{cuisine}}
+          </p>
+          <br>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-4>Features</ion-col>
         <ion-col col-8>
-            <p *ngFor="let feature of features; let i=index">
-                {{i+1}}) {{feature}}
-                </p><br>
+          <p *ngFor="let feature of features; let i=index">
+            {{i+1}}) {{feature}}
+          </p>
+          <br>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -81,26 +83,30 @@
   <div [ngSwitch]="selectedSegment" padding>
     <div *ngSwitchCase="'Menu Items'">
       <h3 *ngIf="menuItem.RestaurantMenu; else no_content">{{menuItem.RestaurantMenu.Name}}</h3>
-        <ion-slides id="imgslide" *ngIf = "ImageUrls.length > 0; else no_content" loop="true" slidesPerView="2">
-            <ion-slide *ngFor="let menu of menuItem.RestaurantMenuResource; let i=index">
-              <img src="https://www.tablesure.com/{{menu.Url}}" class="thumb-img" imageViewer>
-            </ion-slide>
-          </ion-slides>
-          <ng-template #no_content>
-            <h3>No menu available</h3>
-          </ng-template>
+      <ion-slides id="imgslide" *ngIf="ImageUrls.length > 0; else no_content" loop="true" slidesPerView="2">
+        <ion-slide *ngFor="let menu of menuItem.RestaurantMenuResource; let i=index">
+          <img src="https://www.tablesure.com/{{menu.Url}}" class="thumb-img" imageViewer>
+        </ion-slide>
+      </ion-slides>
+      <ng-template #no_content>
+        <h3>No menu available</h3>
+      </ng-template>
     </div>
   </div>
 
   <div [ngSwitch]="selectedSegment" padding>
-      <div *ngSwitchCase="'Recipe of the day'">
-        <h2 class="center">Recipe of the Day</h2>
-        <h3>{{restaurantDetails.Restaurant.RecipeOfTheDay}}</h3>
-      </div>
+    <div *ngSwitchCase="'Recipe of the day'">
+      <h2 class="center">Recipe of the Day</h2>
+      <h3>{{restaurantDetails.Restaurant.RecipeOfTheDay}}</h3>
     </div>
+  </div>
 
 
 
-  <button ion-button full color="danger">Book Me</button>
 
 </ion-content>
+
+<ion-footer>
+  <button ion-button full color="danger" (click)="goToReservation()">Book Me</button>
+
+</ion-footer>

@@ -12,6 +12,8 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable()
 export class TablebookingProvider {
 
+  loader: boolean = true;
+
   constructor(public http: Http) {
     console.log('Hello TablebookingProvider Provider');
   }
@@ -99,11 +101,49 @@ export class TablebookingProvider {
     return dist
   }
 
-  getRestaurantDetails(restaurantId){
+  getRestaurantDetails(restaurantId) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     return this.http.get('https://www.tablesure.com/api/RestaurantLandingVM?restaurantId=' + restaurantId, options)
+      .map(res => res.json())
+  }
+
+  getRestaurantOffers(restaurantOffer) {
+    console.log(restaurantOffer);
+    let restaurantId = restaurantOffer.restaurantId;
+    let noOfPersons = restaurantOffer.noOfPersons;
+    let selectedDate = restaurantOffer.selectedDate;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('https://www.tablesure.com/api/RestaurantLandingVM/GetRestaurantOffers?restaurantId=' + restaurantId + '&selectedDate=' + selectedDate + '&noOfPerson=' + noOfPersons, options)
+      .map(res => res.json())
+  }
+
+  reserveMe(payload){
+    console.log('payload ==>', payload);
+    let userObj = JSON.parse(localStorage.getItem("userTokenObj"));
+    let token: String = userObj.access_token;
+    let tokenType: String = userObj.token_type;
+    let body = payload;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `${tokenType} ` + token);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post('https://www.tablesure.com/api/RestaurantTableBooking?timezoneOffset=-3000', body, options)
+      .map(res => res.json())
+  }
+
+  getBookingSummary(registratioNo){
+    let userObj = JSON.parse(localStorage.getItem("userTokenObj"));
+    let token: String = userObj.access_token;
+    let tokenType: String = userObj.token_type;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `${tokenType} ` + token);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('https://www.tablesure.com/api/RestaurantBookingSummaryVM?bookingId=aa4073ac-0278-4b2b-89bc-7f8696f5b236', options)
       .map(res => res.json())
   }
 

@@ -21,7 +21,8 @@ import { TermsandconditionsPage } from '../pages/termsandconditions/termsandcond
 import { ShoppingcartPage } from '../pages/shoppingcart/shoppingcart';
 import { ProfilePage } from '../pages/profile/profile';
 import { ProfilesettingsPage } from '../pages/profilesettings/profilesettings';
-import { RestaurantdetailsPage } from '../pages/restaurantdetails/restaurantdetails'
+import { RestaurantdetailsPage } from '../pages/restaurantdetails/restaurantdetails';
+import { ReservationdetailsPage } from '../pages/reservationdetails/reservationdetails'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -62,7 +63,8 @@ import { TablebookingProvider } from '../providers/tablebooking/tablebooking';
     ShoppingcartPage,
     ProfilePage,
     ProfilesettingsPage ,
-    RestaurantdetailsPage   
+    RestaurantdetailsPage  ,
+    ReservationdetailsPage 
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,8 @@ import { TablebookingProvider } from '../providers/tablebooking/tablebooking';
     ShoppingcartPage,
     ProfilePage,
     ProfilesettingsPage,
-    RestaurantdetailsPage
+    RestaurantdetailsPage,
+    ReservationdetailsPage
   ],
   providers: [
     StatusBar,
