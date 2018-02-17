@@ -28,7 +28,7 @@
             <ion-input type="password" placeholder="Password" [(ngModel)]="credentials.password"></ion-input>
           </ion-item>
         
-          <a (click)="passwordreset()">Forgot your login detail? <b>Get help signing in</b></a>
+          <a (click)="passwordreset()">Forgot your password? <b>Get help signing in</b></a>
           <button ion-button block outline color="light" [disabled]="!(credentials.email && credentials.password)" (click)="login()">Login</button>
           <p>OR</p>
           <button ion-button block color="facebook" (click)="loginWithFB()">

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+
 
 /**
  * Generated class for the PartybookingPage page.
@@ -15,7 +18,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PartybookingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private payment: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.payment = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required, Validators.pattern("[^ @]*@[^ @]*")],
+      contact: ['', Validators.required],
+      noOfPersons: ['', Validators.required],
+      date: ['', Validators.required],
+      time: ['', Validators.required],
+      budgetPerPerson: ['', Validators.required],
+      requirements: ['', Validators.required],
+      location: ['', Validators.required],
+      meals: ['', Validators.required],
+      message: ['', Validators.required]
+    });
   }
 
   ionViewDidLoad() {

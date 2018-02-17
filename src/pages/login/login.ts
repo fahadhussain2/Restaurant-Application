@@ -8,7 +8,7 @@ import { AuthProvider } from '../../providers/auth/auth'
 import { RegisterPage } from '../register/register';
 import { MenuPage } from '../menu/menu';
 
-// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook'
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook'
 
 /**
  * Generated class for the LoginPage page.
@@ -32,6 +32,7 @@ export class LoginPage {
     public authService: AuthProvider,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
+    public facebook: Facebook
     ) {
   }
 
@@ -83,14 +84,14 @@ export class LoginPage {
     return toast
   }
 
-  // loginWithFB() {
-  //   this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
-  //     console.log('facebook logged in', response);
-  //     this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
-  //       this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] };
-  //       console.log('Facebook info', profile);
-  //     })
-  //   })
-  // }
+  loginWithFB() {
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      console.log('facebook logged in', response);
+      this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
+        this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] };
+        console.log('Facebook info', profile);
+      })
+    })
+  }
 
 }

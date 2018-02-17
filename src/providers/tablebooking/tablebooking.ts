@@ -143,8 +143,15 @@ export class TablebookingProvider {
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `${tokenType} ` + token);
     let options = new RequestOptions({ headers: headers });
-    return this.http.get('https://www.tablesure.com/api/RestaurantBookingSummaryVM?bookingId=aa4073ac-0278-4b2b-89bc-7f8696f5b236', options)
+    return this.http.get('https://www.tablesure.com/api/RestaurantBookingSummaryVM?bookingId='+registratioNo, options)
       .map(res => res.json())
+  }
+
+  makePayment(paymentObj){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post('https://pguat.paytm.com/oltp-web/processTransaction?orderid='+paymentObj.ORDER_ID, options)
   }
 
 

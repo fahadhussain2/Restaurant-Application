@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -22,12 +23,14 @@ import { ShoppingcartPage } from '../pages/shoppingcart/shoppingcart';
 import { ProfilePage } from '../pages/profile/profile';
 import { ProfilesettingsPage } from '../pages/profilesettings/profilesettings';
 import { RestaurantdetailsPage } from '../pages/restaurantdetails/restaurantdetails';
-import { ReservationdetailsPage } from '../pages/reservationdetails/reservationdetails'
+import { ReservationdetailsPage } from '../pages/reservationdetails/reservationdetails';
+import { ReservationsummaryPage } from '../pages/reservationsummary/reservationsummary';
+import { PaymentPage } from '../pages/payment/payment';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
-// import { Facebook} from '@ionic-native/facebook'
+import { Facebook} from '@ionic-native/facebook'
 import { DealsProvider } from '../providers/deals/deals';
 import { SetupcountryProvider } from '../providers/setupcountry/setupcountry';
 import { EmailProvider } from '../providers/email/email';
@@ -64,7 +67,9 @@ import { TablebookingProvider } from '../providers/tablebooking/tablebooking';
     ProfilePage,
     ProfilesettingsPage ,
     RestaurantdetailsPage  ,
-    ReservationdetailsPage 
+    ReservationdetailsPage,
+    ReservationsummaryPage,
+    PaymentPage
   ],
   imports: [
     BrowserModule,
@@ -94,14 +99,16 @@ import { TablebookingProvider } from '../providers/tablebooking/tablebooking';
     ProfilePage,
     ProfilesettingsPage,
     RestaurantdetailsPage,
-    ReservationdetailsPage
+    ReservationdetailsPage,
+    ReservationsummaryPage,
+    PaymentPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    // Facebook,
+    Facebook,
     DealsProvider,
     SetupcountryProvider,
     EmailProvider,

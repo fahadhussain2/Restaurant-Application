@@ -2,17 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { DealsProvider } from '../../providers/deals/deals';
 
+import { PaymentPage } from '../payment/payment'
+
 import { SetupcountryProvider } from '../../providers/setupcountry/setupcountry';
 
 import { AutoCompleteComponent } from 'ionic2-auto-complete';
-// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-/**
- * Generated class for the ShoppingcartPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -137,5 +132,9 @@ export class ShoppingcartPage {
       this.subTotal -= this.cartWithTotalAndSaving[index].dealOffer.DiscountedPrice;
       
     }
+  }
+
+  goToPayment(){
+    this.navCtrl.push(PaymentPage)
   }
 }

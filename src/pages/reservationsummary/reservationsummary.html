@@ -1,0 +1,153 @@
+<!--
+  Generated template for the ReservationsummaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Reservation Summary</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      You are reserved !
+    </ion-card-header>
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col col-8>
+          <p ion-item>
+            <ion-icon color="danger" name="aperture" item-start></ion-icon>
+            Reservation No:
+          </p>
+        </ion-col>
+        <ion-col col-4>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.RegistrationNo}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-8>
+          <p ion-item>
+            <ion-icon color="danger" name="medical" item-start></ion-icon>
+            Restaurant Name:
+          </p>
+        </ion-col>
+        <ion-col col-4>
+          <p ion-item text-wrap>{{bookingSummary.Restaurant.Name}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-8>
+          <p ion-item>
+            <ion-icon color="danger" name="phone-portrait" item-start></ion-icon>
+            Restaurant Contact No:
+          </p>
+        </ion-col>
+        <ion-col col-4>
+          <p ion-item text-wrap>{{bookingSummary.Restaurant.Mobile}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-8>
+          <p ion-item>
+            <ion-icon color="danger" name="paw" item-start></ion-icon>
+            Restaurant Address
+          </p>
+        </ion-col>
+        <ion-col col-4>
+          <p ion-item text-wrap>{{bookingSummary.Restaurant.LocationName}},{{bookingSummary.Restaurant.CityName}},{{bookingSummary.Restaurant.StateName}},{{bookingSummary.Restaurant.CountryName}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p ion-item>
+            <ion-icon color="danger" name="calendar" item-start></ion-icon>
+            Date
+          </p>
+        </ion-col>
+        <ion-col>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.BookingDate | date}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p ion-item>
+            <ion-icon color="danger" name="clock" item-start></ion-icon>
+            Time
+          </p>
+        </ion-col>
+        <ion-col>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.BookingDate | date:'shortTime'}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p ion-item>
+            <ion-icon color="danger" name="cash" item-start></ion-icon>
+            Discount
+          </p>
+        </ion-col>
+        <ion-col>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.OfferAmount}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p ion-item>
+            <ion-icon color="danger" name="people" item-start></ion-icon>
+            Covers
+          </p>
+        </ion-col>
+        <ion-col>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.NumberOfPerson}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p ion-item>
+            <ion-icon color="danger" name="person" item-start></ion-icon>
+            Name
+          </p>
+        </ion-col>
+        <ion-col>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.CustomerName}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-6>
+          <p ion-item>
+            <ion-icon color="danger" name="mail" item-start></ion-icon>
+            Email
+          </p>
+        </ion-col>
+        <ion-col col-6>
+          <p ion-item text-wrap>{{bookingSummary.TableBooking.CustomerEmail}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-card>
+
+  <!-- <button ion-button full icon-left color="danger" (click)="goToTableReservation()">
+    <ion-icon name="cart"></ion-icon>
+  </button> -->
+
+</ion-content>

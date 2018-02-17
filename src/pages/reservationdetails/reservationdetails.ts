@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TermsandconditionsPage } from '../../pages/termsandconditions/termsandconditions';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { TablebookingProvider } from '../../providers/tablebooking/tablebooking'
 import { registerModeConfigs } from 'ionic-angular/config/mode-registry';
+import { ReservationsummaryPage } from '../../pages/reservationsummary/reservationsummary'
 
 /**
  * Generated class for the ReservationdetailsPage page.
@@ -32,6 +33,7 @@ export class ReservationdetailsPage {
     selectedDate: new Date().toISOString(),
     noOfPersons: '1'
   }
+  loading;
   username;
   email;
   phoneNumber;
@@ -43,13 +45,13 @@ export class ReservationdetailsPage {
 
   // currentLocalDate = new Date(Number(new Date())).toLocaleDateString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public tableBooking: TablebookingProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public tableBooking: TablebookingProvider, public loadingCtrl: LoadingController) {
     this.restaurantOffer.restaurantId = this.navParams.get('restaurantObj').Restaurant.Id;
     // console.log('fff', this.currentLocalDate, this.currentLocalTime)
     this.auth.getCurrentUSer().subscribe(user => {
       console.log('current user ==>', user)
       this.currentUser = user;
-      this.username = `${user.FirstName} ${user.LastName}`;
+      this.username = user.FirstName && user.LastName ? `${user.FirstName} ${user.LastName}` : '';
       this.email = user.Email;
       this.phoneNumber = user.PhoneNumber;
       this.phoneNumber2 = user.PhoneNumber2
@@ -266,6 +268,7 @@ export class ReservationdetailsPage {
 
   }
 
+
   reserveMe() {
     let reservationPayload = {
       BookingDate: this.restaurantOffer.selectedDate,
@@ -279,17 +282,25 @@ export class ReservationdetailsPage {
       NumberOfPerson: this.restaurantOffer.noOfPersons,
     }
 
-    // this.tableBooking.reserveMe(reservationPayload).subscribe(registrationNo => {
-      // console.log('success', registrationNo);
-      this.tableBooking.getBookingSummary('registrationNo').subscribe(bookingSumamry => {
+    var loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent'
+    });
+
+    loading.present();
+
+    this.tableBooking.reserveMe(reservationPayload).subscribe(registrationNo => {
+      console.log('success', registrationNo);
+      this.tableBooking.getBookingSummary(registrationNo).subscribe(bookingSumamry => {
+        loading.dismiss().then(() => {
+          this.navCtrl.push(ReservationsummaryPage, { summary: bookingSumamry })
+        })
         console.log('booking summary ==>', bookingSumamry);
       }, err => {
         throw err
       })
-    // }, err => {
-    //   throw err
-    // })
+    }, err => {
+      throw err
+    })
   }
-
-
 }

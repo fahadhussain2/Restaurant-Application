@@ -1,0 +1,48 @@
+<!--
+  Generated template for the PaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>payment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="payment" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label floating>Card Number</ion-label>
+      <ion-input type="number" formControlName="card"></ion-input>
+    </ion-item>
+    <div>
+        <span *ngIf="payment.controls['card'].errors && payment.controls['card'].dirty" class="error" padding>card number is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>CVV</ion-label>
+      <ion-input type="number" formControlName="cvv"></ion-input>
+    </ion-item>
+    <div>
+        <span *ngIf="payment.controls['cvv'].errors && payment.controls['cvv'].dirty" class="error" padding>cvv is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Expiry Date</ion-label>
+      <ion-datetime color="danger" displayFormat="MM YYYY" formControlName="expiry"></ion-datetime>
+    </ion-item>
+    <div>
+        <span *ngIf="payment.controls['expiry'].errors && payment.controls['expiry'].dirty" class="error" padding>expiry date is required.</span>
+    </div>
+  </form>
+
+  <div [innerHtml]="text"></div>
+
+  <ion-footer>
+    <button ion-button full color="danger" (click)="makePayment()" type="submit" [disabled]="!payment.valid">Submit</button>
+  </ion-footer>
+
+</ion-content>

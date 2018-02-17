@@ -12,12 +12,21 @@ page-reservationdetails {
     .spin,.center,.offers{
         text-align: center;        
     }
+    
 
-    ion-spinner * {
-        width: 40px;
-        height: 40px;
-        stroke: #444;
-        fill: #222;
-      }
+    // ion-spinner * {
+    //     width: 40px;
+    //     height: 40px;
+    //     stroke: #444;
+    //     fill: white
+    //   }
+
+    // ion-spinner * {
+    //     margin-left: 15px;
+    //     stroke: white !important;
+    //     fill: white !important;
+    //   }
+
 
 }
+

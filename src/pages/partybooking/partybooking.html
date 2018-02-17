@@ -1,18 +1,102 @@
-<!-- <ion-header>
+<ion-content>
 
-  <ion-navbar>
-    <ion-title>partybooking</ion-title>
-  </ion-navbar>
+  <form padding [formGroup]="payment" (ngSubmit)="logForm()">
 
-</ion-header> --><!--
-  Generated template for the PartybookingPage page.
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <div *ngIf="payment.controls['name'].errors && payment.controls['name'].dirty">
+      <span class="error" padding>Name is required.</span>
+    </div>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <div *ngIf="payment.controls['email'].errors && payment.controls['email'].dirty">
+      <span class="error" padding>Email is required.</span>
+    </div>
 
+    <ion-item>
+      <ion-label floating>Contact Number</ion-label>
+      <ion-input type="email" formControlName="contact"></ion-input>
+    </ion-item>
+    <div *ngIf="payment.controls['contact'].errors && payment.controls['contact'].dirty">
+      <span class="error" padding>Contact Number is required.</span>
+    </div>
 
+    <ion-item>
+      <ion-label floating>Number of Persons</ion-label>
+      <ion-input type="number" formControlName="noOfPersons"></ion-input>
+    </ion-item>
+    <div *ngIf="payment.controls['noOfPersons'].errors && payment.controls['noOfPersons'].dirty">
+      <span class="error" padding>No of persons are required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Date of Party</ion-label>
+      <ion-datetime color="danger" displayFormat="DD MM YYYY" formControlName="date"></ion-datetime>
+    </ion-item>
+    <div *ngIf="payment.controls['date'].errors && payment.controls['date'].dirty">
+      <span class="error" padding>Date is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Time of Party</ion-label>
+      <ion-datetime color="danger" displayFormat="hh mm A" formControlName="time"></ion-datetime>
+    </ion-item>
+    <div *ngIf="payment.controls['time'].errors && payment.controls['time'].dirty">
+      <span class="error" padding>Time is required.</span>
+    </div>
 
-<ion-content padding>
+    <ion-item>
+      <ion-label floating>Budget Per Person</ion-label>
+      <ion-input type="number" formControlName="budgetPerPerson"></ion-input>
+    </ion-item>
+    <div *ngIf="payment.controls['budgetPerPerson'].errors && payment.controls['budgetPerPerson'].dirty">
+      <span class="error" padding>Budget per person is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Select Requirements</ion-label>
+      <ion-select formControlName="requirements">
+        <ion-option value="Catering">Catering</ion-option>
+        <ion-option value="Party Hall">Party Hall</ion-option>
+        <ion-option value="Both">Both</ion-option>
+        <ion-option value="None">None</ion-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="payment.controls['requirements'].errors && payment.controls['requirements'].dirty">
+      <span class="error" padding>Requirement is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Location</ion-label>
+      <ion-datetime color="danger" displayFormat="MM YYYY" formControlName="location"></ion-datetime>
+    </ion-item>
+    <div *ngIf="payment.controls['location'].errors && payment.controls['location'].dirty">
+      <span class="error" padding>Location is required.</span>
+    </div>
+
+    <ion-item>
+      <ion-label floating>Select Meal Types</ion-label>
+      <ion-select formControlName="requirements">
+          <ion-option value="Lunch">Lunch</ion-option>
+          <ion-option value="Dinner">Dinner</ion-option>
+          <ion-option value="Others">Others</ion-option>
+        </ion-select>
+    </ion-item>
+    <div *ngIf="payment.controls['meals'].errors && payment.controls['meals'].dirty">
+      <span class="error" padding>Meal is required.</span>
+    </div>
+    <ion-item>
+      <ion-label floating>Your Message</ion-label>
+      <ion-textarea formControlName="message"></ion-textarea>
+    </ion-item>
+    <div *ngIf="payment.controls['message'].errors && payment.controls['message'].dirty">
+      <span class="error" padding>Message is required.</span>
+    </div>
+  </form>
+
+  <!-- <ion-footer> -->
+  <button ion-button full color="danger" (click)="makePayment()" type="submit">Book</button>
+  <!-- </ion-footer> -->
 
 </ion-content>
